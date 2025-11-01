@@ -34,7 +34,12 @@
 
         <!-- Action Content -->
         <section>
+            <button type="button" onclick="toggleFilterVisibility()">Filter</button>
 
+            <div id="filter-container" style="display: none;">
+                <input type="text" id="filter-input" placeholder="Filter task.." onkeyup="filterTodo">
+                
+            </div>
         </section>
 
         <!-- Todo list Section -->

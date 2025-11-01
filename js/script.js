@@ -25,12 +25,31 @@ function addTodo() {
     // Proceed with adding the todo
 }
 
-function deleteTodo() {
-   
+function deleteTodo(index) {
+   //hapus item dari todos array berdasarkan index
+   todos.splice(index, 1);
+
+   //render ulang daftar todo
+   renderTodos();
 }
 
-function filterTodo() {
+function toggleFilterVisibility() {
+    const filterContainer = document.getElementById('filter-container');
 
+    if (filterContainer.style.display === 'none') {
+        filterContainer.style.display = 'block';
+    } else {   
+        filterContainer.style.display = 'none';
+        document.getElementById('filter-input').value = '';
+        renderTodos();
+    }
+}
+
+
+
+function filterTodo() {
+    const filtertext = document.getElementById('filter-input').value;
+    renderTodos(filtertext);
 }
 
 function renderTodos() {
