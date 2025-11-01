@@ -20,9 +20,10 @@ function addTodo() {
     } else {
         todos.push({ task: todoInput, dueDate: dateInput });
         
+        // Perbaikan: Membersihkan input setelah ditambahkan
         document.getElementById('todo-input').value = '';
         document.getElementById('date-input').value = '';
-        }
+    }
     renderTodos();
     // Proceed with adding the todo
 }
@@ -47,34 +48,51 @@ function toggleFilterVisibility() {
     }
 }
 
-
-
 function filterTodo() {
-    const filtertext = document.getElementById('filter-input').value;
-    renderTodos(filtertext);
+    // Gunakan filterText untuk konsistensi
+    const filterText = document.getElementById('filter-input').value;
+    renderTodos(filterText);
 }
 
-function renderTodos(filtertext = '') {
+// PERBAIKAN UTAMA DI SINI
+function renderTodos(filterText = '') { // 1. Pastikan menerima parameter filterText
     const todoList = document.getElementById('todo-list');
     todoList.innerHTML = '';
 
+    // 2. Gunakan filterText dari parameter (huruf T besar/kecil harus konsisten)
     const filter = filterText.toLowerCase();
-    let itemRendered = 0;
+    let itemsRendered = 0; // Gunakan camelCase yang konsisten
 
     todos.forEach((todo, index) => {
-        const tasktext = '${todo.task} ${todo.dueDate}'.toLowerCase()};
+        // 3. Perbaikan Template Literal: Gunakan backtick (`) dan hapus kurung kurawal berlebih
+        const taskText = `${todo.task} ${todo.dueDate}`.toLowerCase();
 
-        if (tasktext.includes(filter)) {
+        // Logika Filter
+        if (taskText.includes(filter)) {
+            todoList.innerHTML += `<li> 
+                <span>${todo.task} - ${todo.dueDate}</span>
+                <button onclick="deleteTodo(${index})">Delete</button>
+            </li>`;
+            itemsRendered++; // Increment di dalam blok IF
+        }
+    }); // 4. Tutup forEach loop di sini
 
-        todoList.innerHTML += `<li> 
-        <span>${todo.task} - ${todo.dueDate}</span>
-        <button onclick="deleteTodo(${index})">Delete</button>
-        </li>`;
-        itemrendered++;
-    });
-
-    if(todos.length === 0 || itemrendered === 0 && filtertext.length > 0) {
+    // 5. Perbaikan Logika Kondisi dan Syntax Error
+    if(todos.length === 0) {
+        todoList.innerHTML = '<li>no todos available</li>';
+    } else if (itemsRendered === 0 && filterText.length > 0) {
         todoList.innerHTML = '<li>No tasks found.</li>';
-}
+    }
 }
 
+// FUNGSI BARU: Menghapus semua tugas
+function deleteAllTodos() {
+    // Konfirmasi penghapusan (sangat disarankan)
+    if (confirm("Are you sure you want to delete all tasks?")) {
+        // Reset array 'todos' menjadi array kosong
+        todos = [];
+        
+        // Perbarui tampilan, filter akan otomatis bersih
+        renderTodos();
+    }
+}
