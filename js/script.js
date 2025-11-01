@@ -20,6 +20,8 @@ function addTodo() {
     } else {
         todos.push({ task: todoInput, dueDate: dateInput });
         
+        document.getElementById('todo-input').value = '';
+        document.getElementById('date-input').value = '';
         }
     renderTodos();
     // Proceed with adding the todo
@@ -52,14 +54,27 @@ function filterTodo() {
     renderTodos(filtertext);
 }
 
-function renderTodos() {
+function renderTodos(filtertext = '') {
     const todoList = document.getElementById('todo-list');
     todoList.innerHTML = '';
 
+    const filter = filterText.toLowerCase();
+    let itemRendered = 0;
+
     todos.forEach((todo, index) => {
+        const tasktext = '${todo.task} ${todo.dueDate}'.toLowerCase()};
+
+        if (tasktext.includes(filter)) {
+
         todoList.innerHTML += `<li> 
         <span>${todo.task} - ${todo.dueDate}</span>
         <button onclick="deleteTodo(${index})">Delete</button>
         </li>`;
+        itemrendered++;
     });
+
+    if(todos.length === 0 || itemrendered === 0 && filtertext.length > 0) {
+        todoList.innerHTML = '<li>No tasks found.</li>';
 }
+}
+
