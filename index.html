@@ -8,51 +8,56 @@
 
     <!-- CSS External File Link -->
     <link rel="stylesheet" href="styles.css">
+
+    <!-- tailwind script -->
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body>
+<body class="bg-gray-50 text-gray-800 min-h-screen flex flex-col items-center justify-center font-sans">
 
     <!-- Header Content  -->
-    <header>
-        <h1>Todo List Website - Aliyudin</h1>
+    <header class="w-full text-center pt-8">
+        <h1 class="text-3xl font-extrabold text-teal-600">Todo List Website - Aliyudin</h1>
     </header>
 
     <!-- Main Content  -->
-    <main>
+    <main class="w-full max-w-lg bg-white p-6 rounded-xl shadow-xl space-y-5 my-8 border border-gray-200">
         <!-- form section -->
-        <section>
-             <form>
+        <section class="space-y-3">
+             <form class="flex space-x-2">
                 <!-- todo input -->
-                <input type="text" id="todo-input" placeholder="Enter your todo item" required>
+                <input type="text" id="todo-input" placeholder="Enter your todo item" required class="flex-grow p-2 rounded-lg bg-gray-100 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-teal-500">
             
                 <!-- date input -->
-                <input type="date" id="date-input" placeholder="Enter due date">
+                <input type="date" id="date-input" placeholder="Enter due date" class="p-2 rounded-lg bg-gray-100 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-teal-500">
             </form>
-            <button type="button" onclick="addTodo();" id="add-todo-btn">Add Todo</button>
+            <button type="button" onclick="addTodo();" id="add-todo-btn" class="w-full py-2 bg-teal-500 text-white font-semibold rounded-lg hover:bg-teal-600 transition duration-150">Add Todo</button>
         </section>
     
 
         <!-- Action Content -->
-        <section>
-            <button type="button" onclick="toggleFilterVisibility()">Filter</button>
-            <button type="button" onclick="deleteAllTodos()">DELETE ALL</button>
+        <section class="flex flex-col space-y-3">
+            <div class="flex space-x-2">
+                <button type="button" onclick="toggleFilterVisibility()" class="flex-grow py-2 bg-gray-200 text-gray-700 font-medium rounded-lg hover:bg-gray-300 border border-gray-300 transition duration-150">Filter</button>
+                <button type="button" onclick="deleteAllTodos()" class="flex-grow py-2 bg-red-500 text-white font-medium rounded-lg hover:bg-red-600 transition duration-150">DELETE ALL</button>
+            </div>
             <div id="filter-container" style="display: none;">
-                <input type="text" id="filter-input" placeholder="Filter task.." onkeyup="filterTodo();">
+                <input type="text" id="filter-input" placeholder="Filter task.." onkeyup="filterTodo();" class="w-full p-2 rounded-lg bg-gray-100 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-teal-500">
                 
             </div>
         </section>
 
         <!-- Todo list Section -->
         <section>
-            <ul id="todo-list">
-                <li>no todos available</li>
+            <ul id="todo-list" class="space-y-2">
+                <li class="p-3 bg-white rounded-lg text-center text-gray-500 shadow-sm border border-gray-200">no todos available</li>
             </ul>
         </section>
 
     </main>
 
     <!-- footer content -->
-    <footer>      
+    <footer class="mb-8 text-sm text-gray-500">      
         <p>&copy; 2025 Todo List - Aliyudin</p>
     </footer>
 

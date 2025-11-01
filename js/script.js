@@ -69,7 +69,7 @@ function renderTodos(filterText = '') { // 1. Pastikan menerima parameter filter
 
         // Logika Filter
         if (taskText.includes(filter)) {
-            todoList.innerHTML += `<li> 
+            todoList.innerHTML += `<li class="flex justify-between items-center bg-white p-3 mb-2 rounded shadow border border-gray-200"> 
                 <span>${todo.task} - ${todo.dueDate}</span>
                 <button onclick="deleteTodo(${index})">Delete</button>
             </li>`;
